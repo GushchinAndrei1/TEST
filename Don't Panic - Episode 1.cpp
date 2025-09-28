@@ -7,35 +7,35 @@ using namespace std;
 
 int main()
 {
-    int nb_floors; // колличесвто этажей
-    int width; // количнство позиций на этаже
-    int nb_rounds; // максимальное число раундов
-    int exit_floor; // этаж на котором находится выход
-    int exit_pos; // похиция выхода на этом этаже
-    int nb_total_clones; // общее количество клонов
-    int nb_additional_elevators; // игонор, всегда 0
-    int nb_elevators; // количество лифтов
+    int nb_floors; // РєРѕР»Р»РёС‡РµСЃРІС‚Рѕ СЌС‚Р°Р¶РµР№
+    int width; // РєРѕР»РёС‡РЅСЃС‚РІРѕ РїРѕР·РёС†РёР№ РЅР° СЌС‚Р°Р¶Рµ
+    int nb_rounds; // РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ СЂР°СѓРЅРґРѕРІ
+    int exit_floor; // СЌС‚Р°Р¶ РЅР° РєРѕС‚РѕСЂРѕРј РЅР°С…РѕРґРёС‚СЃСЏ РІС‹С…РѕРґ
+    int exit_pos; // РїРѕС…РёС†РёСЏ РІС‹С…РѕРґР° РЅР° СЌС‚РѕРј СЌС‚Р°Р¶Рµ
+    int nb_total_clones; // РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєР»РѕРЅРѕРІ
+    int nb_additional_elevators; // РёРіРѕРЅРѕСЂ, РІСЃРµРіРґР° 0
+    int nb_elevators; // РєРѕР»РёС‡РµСЃС‚РІРѕ Р»РёС„С‚РѕРІ
     cin >> nb_floors >> width >> nb_rounds >> exit_floor >> exit_pos >> nb_total_clones >> nb_additional_elevators >> nb_elevators; cin.ignore();
 
-    // ограничения
+    // РѕРіСЂР°РЅРёС‡РµРЅРёСЏ, РјРѕР¶РЅРѕ Р±С‹Р»Рѕ РЅРµ РїРёСЃР°С‚СЊ
     if (nb_floors < 1 || nb_floors > 15) return 0;
-    if (width < 5 || width > 100) return 0; // в данном эпизоде не используется
-    if (nb_rounds < 10 || nb_rounds > 200) return 0; // в данном эпизоде не используется
+    if (width < 5 || width > 100) return 0; // РІ РґР°РЅРЅРѕРј СЌРїРёР·РѕРґРµ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
+    if (nb_rounds < 10 || nb_rounds > 200) return 0; // РІ РґР°РЅРЅРѕРј СЌРїРёР·РѕРґРµ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
     if (exit_floor < 0 || exit_floor >= nb_floors) return 0;
-    if (exit_pos < 0 || exit_pos > width) return 0; // в данном эпизоде не используется
-    if (nb_total_clones < 2 || nb_total_clones > 50) return 0; // в данном эпизоде не используется
+    if (exit_pos < 0 || exit_pos > width) return 0; // РІ РґР°РЅРЅРѕРј СЌРїРёР·РѕРґРµ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
+    if (nb_total_clones < 2 || nb_total_clones > 50) return 0; // РІ РґР°РЅРЅРѕРј СЌРїРёР·РѕРґРµ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
     if (nb_elevators < 0 || nb_elevators > 100) return 0;
 
 
 
-    // цикл для ввода этажей и лифтов на нем
+    // С†РёРєР» РґР»СЏ РІРІРѕРґР° СЌС‚Р°Р¶РµР№ Рё Р»РёС„С‚РѕРІ РЅР° РЅРµРј
     vector<int> elevatorPos(nb_floors, -1);
     for (int i = 0; i < nb_elevators; i++) {
-        int elevator_floor; // этажи на котором находится лифт
-        int elevator_pos; // позиция лифта
+        int elevator_floor; // СЌС‚Р°Р¶Рё РЅР° РєРѕС‚РѕСЂРѕРј РЅР°С…РѕРґРёС‚СЃСЏ Р»РёС„С‚
+        int elevator_pos; // РїРѕР·РёС†РёСЏ Р»РёС„С‚Р°
         cin >> elevator_floor >> elevator_pos; cin.ignore();
 
-        // проверяем позицию этажа и записываем в вектор elevatorPos
+        // РїСЂРѕРІРµСЂСЏРµРј РїРѕР·РёС†РёСЋ СЌС‚Р°Р¶Р° Рё Р·Р°РїРёСЃС‹РІР°РµРј РІ РІРµРєС‚РѕСЂ elevatorPos
         if (elevator_floor >= 0 && elevator_floor < nb_floors) {
             elevatorPos[elevator_floor] = elevator_pos;
             continue;
@@ -44,38 +44,38 @@ int main()
 
 
     while (1) {
-        int clone_floor; // этаж на котором находится ведущий клон
-        int clone_pos; // позиция на котором находится ведущий клон
-        string direction; // направление движеня ведущего клона
+        int clone_floor; // СЌС‚Р°Р¶ РЅР° РєРѕС‚РѕСЂРѕРј РЅР°С…РѕРґРёС‚СЃСЏ РІРµРґСѓС‰РёР№ РєР»РѕРЅ
+        int clone_pos; // РїРѕР·РёС†РёСЏ РЅР° РєРѕС‚РѕСЂРѕРј РЅР°С…РѕРґРёС‚СЃСЏ РІРµРґСѓС‰РёР№ РєР»РѕРЅ
+        string direction; // РЅР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅСЏ РІРµРґСѓС‰РµРіРѕ РєР»РѕРЅР°
         cin >> clone_floor >> clone_pos >> direction; cin.ignore();
 
-        // ограничения 
+        // РѕРіСЂР°РЅРёС‡РµРЅРёСЏ 
         if (clone_floor < -1 || clone_floor >= nb_floors) return 0;
-        if (clone_pos < -1 || clone_pos >= width) return 0; // в данном эпизоде не используется
+        if (clone_pos < -1 || clone_pos >= width) return 0; // РІ РґР°РЅРЅРѕРј СЌРїРёР·РѕРґРµ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
 
-        // если клона нет, то ждем его
+        // РµСЃР»Рё РєР»РѕРЅР° РЅРµС‚, С‚Рѕ Р¶РґРµРј РµРіРѕ
         if (clone_floor == -1) {
             cout << "WAIT" << endl;
             continue;
         }
-        // выбираем цель клона
+        // РІС‹Р±РёСЂР°РµРј С†РµР»СЊ РєР»РѕРЅР°
         int target;
-        if (clone_floor == exit_floor) { // если клон находится на этаже с выходом, то цель - позиция выхода exit_pos
+        if (clone_floor == exit_floor) { // РµСЃР»Рё РєР»РѕРЅ РЅР°С…РѕРґРёС‚СЃСЏ РЅР° СЌС‚Р°Р¶Рµ СЃ РІС‹С…РѕРґРѕРј, С‚Рѕ С†РµР»СЊ - РїРѕР·РёС†РёСЏ РІС‹С…РѕРґР° exit_pos
             target = exit_pos;
         }
-        else { // иначе цель - позиция лифта
+        else { // РёРЅР°С‡Рµ С†РµР»СЊ - РїРѕР·РёС†РёСЏ Р»РёС„С‚Р°
             target = elevatorPos[clone_floor];
         }
-        // если цели нет, то ЖДЕМ
+        // РµСЃР»Рё С†РµР»Рё РЅРµС‚, С‚Рѕ Р–Р”Р•Рњ
         if (target == -1) {
             cout << "WAIT" << endl;
             continue;
         }
-        // блокируем клона если его направление  не в сторону лифта или выхода
+        // Р±Р»РѕРєРёСЂСѓРµРј РєР»РѕРЅР° РµСЃР»Рё РµРіРѕ РЅР°РїСЂР°РІР»РµРЅРёРµ  РЅРµ РІ СЃС‚РѕСЂРѕРЅСѓ Р»РёС„С‚Р° РёР»Рё РІС‹С…РѕРґР°
         if ((direction == "LEFT" && clone_pos < target) || (direction == "RIGHT" && clone_pos > target)) {
             cout << "BLOCK" << endl;
         }
-        // иначе ждем
+        // РёРЅР°С‡Рµ Р¶РґРµРј
         else {
             cout << "WAIT" << endl;
         }
